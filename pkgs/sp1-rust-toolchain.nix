@@ -11,29 +11,29 @@
 
 stdenv.mkDerivation rec {
   pname = "sp1-rust-toolchain";
-  version = "1.81.0";
+  version = "1.88.0";
 
   src = fetchurl (
     if stdenv.isDarwin then
       if stdenv.isAarch64 then
         {
-          url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-aarch64-apple-darwin.tar.gz";
-          hash = "sha256-tVvf3syK18uRLp3Idam3oqjcZvB13JBoXBkskbkQQZQ=";
+          url = "https://github.com/succinctlabs/rust/releases/download/succinct-${version}/rust-toolchain-aarch64-apple-darwin.tar.gz";
+          hash = "sha256-CUnW2kCfNbLr9FVPZ1FOBPSlFeKNwZ8DjgfX5pQpEHM=";
         }
       else
         {
-          url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-x86_64-apple-darwin.tar.gz";
-          hash = "sha256-5DTmfkU1hr7VG/T4BhYaAaURti2PfXM/W38x7dOD+UM=";
+          url = "https://github.com/succinctlabs/rust/releases/download/succinct-${version}/rust-toolchain-x86_64-apple-darwin.tar.gz";
+          hash = "sha256-JG8VZ0ApQ1Kveo9xOrtLoWXQjsZzVxOmt61Mqv9o2oI=";
         }
     else if stdenv.isAarch64 then
       {
-        url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-aarch64-unknown-linux-gnu.tar.gz";
-        hash = "sha256-aLxKKSN+Lrhi2jYyTRnPg1u5P0UQatIGuheDb7eGLzI=";
+        url = "https://github.com/succinctlabs/rust/releases/download/succinct-${version}/rust-toolchain-aarch64-unknown-linux-gnu.tar.gz";
+        hash = "sha256-Np5xUvWcNOH9Sbx9udgkzkA1fRKHSdmU5hV/6FWH5ao=";
       }
     else
       {
-        url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
-        hash = "sha256-+Ll4tE/e39nz3+oSfuEfE+4v2q/96iYZSJ3/e755HM4=";
+        url = "https://github.com/succinctlabs/rust/releases/download/succinct-${version}/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
+        hash = "sha256-pbO+AiR/FmZsbZt7ormGEfbsssztatRDpzrzB6wh5XA=";
       }
   );
 
