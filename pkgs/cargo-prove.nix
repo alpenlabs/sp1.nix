@@ -11,8 +11,5 @@ rustPlatform.buildRustPackage rec {
   doCheck = false;
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
-    outputHashes = {
-      "p3-air-0.1.0" = "sha256-OgLF1AUNoSzqHppAAwYxwZV9hBeXzwH5uIjsLCsFkk0=";
-    };
   };
 }
