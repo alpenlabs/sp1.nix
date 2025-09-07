@@ -7,6 +7,7 @@
   zlib,
   ncurses,
   gcc-unwrapped,
+  cargo,
 }:
 
 stdenv.mkDerivation rec {
@@ -51,6 +52,12 @@ stdenv.mkDerivation rec {
 
   sourceRoot = ".";
 
+  # Prevent stripping of .rlib files which removes .rmeta sections needed for compilation
+  dontStrip = true;
+
+  # Also prevent ELF patching which might corrupt the metadata
+  dontPatchELF = true;
+
   installPhase = ''
     runHook preInstall
 
@@ -59,6 +66,23 @@ stdenv.mkDerivation rec {
     cp -r lib/* $out/lib/
 
     runHook postInstall
+  '';
+
+  postInstall = ''
+    # Make the toolchain available as +succinct
+    mkdir -p $out/toolchains/succinct
+    ln -sf $out/* $out/toolchains/succinct/
+
+    # Create a wrapper script for cargo +succinct
+    mkdir -p $out/bin
+    cat > $out/bin/cargo-succinct << 'EOF'
+    #!/bin/bash
+    RUSTC_PATH="$0"
+    RUSTC_PATH="''${RUSTC_PATH%/bin/cargo-succinct}/bin/rustc"
+    export RUSTC="$RUSTC_PATH"
+    exec ${cargo}/bin/cargo "$@"
+    EOF
+    chmod +x $out/bin/cargo-succinct
   '';
 
   meta = with lib; {
