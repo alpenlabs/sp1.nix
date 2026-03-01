@@ -1,5 +1,6 @@
 {
   lib,
+  protobuf,
   rustPlatform,
   sp1-src,
 }:
@@ -12,4 +13,8 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
   };
+
+  nativeBuildInputs = [
+    protobuf
+  ];
 }
